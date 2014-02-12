@@ -1,0 +1,123 @@
+#-----------------------------------------------------
+# Text alignment, other possible values are commented
+alignment top_right
+background yes
+
+# border width
+border_width 1
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 2
+
+# number of net samples to average
+# set to 1 to disable averaging
+net_avg_samples 2
+
+## Default colors and also border colors
+default_color white
+default_outline_color white
+#default_shade_color white
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+## Draw borders around text
+draw_borders no
+draw_graph_borders yes
+
+# Draw outlines?
+draw_outline no
+
+## Draw shades?
+draw_shades no
+
+## USE XFT?
+use_xft yes
+xftfont Verdana:size=12
+text_buffer_size 2048
+## Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+gap_x 5
+gap_y 60
+
+# Minimum size of text area
+minimum_size 180 0
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+## Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_class Conky
+own_window_type desktop
+own_window_argb_visual true
+own_window_argb_value 0
+
+# Stippled borders?
+stippled_borders 0
+
+## Update interval in seconds
+update_interval 1
+
+## This is the number of times Conky will update before quitting.
+## Set to zero to run forever.
+total_run_times 0
+
+# set to yes if you want all text to be in uppercase
+uppercase no
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+use_spacer none
+
+out_to_console no
+out_to_stderr no
+extra_newline no
+override_utf8_locale yes
+
+TEXT
+SYSTEM ${hr 2}
+
+Kernel:  ${alignr}${kernel}
+CPU: ${cpu cpu}% ${alignr}${cpubar 8,60 cpu}
+RAM: $memperc% ${alignr}${membar 8,60}
+Uptime: ${alignr}${uptime}
+
+DATE ${hr 2}
+
+${alignc 20}${font Verdana:size=26}${time %H:%M}${font}
+${alignc}${time %a %d %b %Y}
+
+HD ${hr 2}
+
+/:
+${fs_free /}/${fs_size /} ${alignr}${fs_bar 8,60 /}
+
+NETWORK ${hr 2}
+#${if_existing /proc/net/route lo}
+#Up: ${upspeed lo} kb/s ${alignr}${upspeedgraph lo 8,60 789E2D A7CC5C}
+#Down: ${downspeed lo} kb/s ${alignr}${downspeedgraph lo 8,60 789E2D A7CC5C}
+#Upload: ${alignr}${totalup lo}
+#Download: ${alignr}${totaldown lo}
+#Signal: ${wireless_link_qual lo}% ${alignr}${wireless_link_bar 8,60 lo}
+#${else}
+${if_existing /proc/net/route enp0s12}
+enp0s12:
+Up: ${upspeed enp0s12} kb/s ${alignr}${upspeedgraph enp0s12 8,60 789E2D A7CC5C}
+Down: ${downspeed enp0s12} kb/s ${alignr}${downspeedgraph enp0s12 8,60 789E2D A7CC5C}
+Upload: ${alignr}${totalup enp0s12}
+Download: ${alignr}${totaldown enp0s12}
+${else}${font PizzaDude Bullets:size=14}4${font}   Network Unavailable
+${endif}
+
+WEATHER ${hr 2}
+${voffset 0}${alignc 40}${font Weather:style=Bold:size=80}${execi 600 sh ~/weather/weather icon}${font}
+${voffset 0}${alignc}${exec sh ~/weather/weather forecast}
+${voffset 0}${font Weather:size=60}y${font}${voffset -35}${alignc 30}${font Verdana:size=30}${exec sh ~/weather/weather temp}  ${font Verdana:size=25}C${font}
+
+
+${voffset 0}Humidity: ${alignr}${exec sh ~/weather/weather humidity} %
+${voffset 0}${font}Wind Speed: ${alignr}${exec sh ~/weather/weather windspeed} m/s
