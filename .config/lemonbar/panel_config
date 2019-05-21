@@ -1,0 +1,10 @@
+#!\bin\bash
+
+function pIcon () {
+	#echo "|%{F#FFFF00}$1%{F-}+%{F#00FFFF}$2%{F-}|"
+	echo -e "%{F$1}$2%{F-}"
+}
+function pTextUnderline () {
+	#echo "!%{F#FF0000}$1%{F-}*%{F#00FF00}$2%{F-}*%{F#0000FF}$3%{F-}!"
+	echo -e "%{+u}%{F$1}%{U$2}$3%{F-}%{U-}%{-u}"
+}

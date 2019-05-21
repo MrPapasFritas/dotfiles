@@ -1,0 +1,45 @@
+#!\bin\bash
+
+# icons
+GENTOO="\ue1ec"
+ARCH="\uf17c"
+CSTART="\ue00d"
+CSOUND="\ue04d"
+CVOLUME="\ue204"
+CMAIL="\ue070"
+CDRIVE="\uf233"
+CCPU="\uf538"
+CRAM="\uf2db"
+CTEMP="\uf76b"
+CNET="\uf6ff"
+CWIFI="\uf1eb"
+# Time
+CCLOCK="\uf017"
+CDATE="\uf073"
+# panel center
+#CNONE="\ue0c0"
+CNONE="\uf0c8"
+#CFULL="\ue0c1"
+CFULL="\uf45c"
+# icons panel music
+CPREV="\ue055"
+CNEXT="\ue05b"
+CPLAY="\ue058"
+CPAUS="\ue059"
+# icon volume
+VPLUS="\ue06c"
+VMINUS="\ue06d"
+# battery or AC
+BAT100="\uf240"
+BAT75="\uf241"
+BAT50="\uf242"
+BAT25="\uf243"
+BAT0="\uf244"
+CAC="\uf1e6"
+
+## programs
+URXVT="\uf120"
+XTERM="\uf120"
+CHROME="\uf268"
+DESK="\uf108"
+FILEM="\uf07b"
