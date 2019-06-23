@@ -67,8 +67,8 @@ super + {_,shift + }c
 	bspc node -f {next,prev}.local
 
 # focus the next/previous desktop in the current monitor
-super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
+# super + bracket{left,right}
+# 	bspc desktop -f {prev,next}.local
 
 # focus the last node/desktop
 super + {grave,Tab}
@@ -83,7 +83,6 @@ super + {o,i}
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
-
 #
 # preselect
 #
@@ -119,3 +118,30 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+alt + {Left, Right}
+  bspc desktop -f {prev,next}
+
+# rotate parent
+super + r
+  bspc node @parent -R 90
+
+
+################
+#### VOLUME ####
+################
+# Raise volume
+# note: also ensures audio is enabled
+XF86Audio{Raise,Lower}Volume
+	amixer -q set Master 5%{+,-} on
+
+# Mute audio
+# note: toggle audio
+XF86AudioMute
+  amixer -q set Master toggle
+
+####################
+#### BRIGHTNESS ####
+####################
+XF86MonBrightness{Up,Down}
+  light {-A,-U} 5

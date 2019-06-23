@@ -1,3 +1,14 @@
+"--- Vundle ---
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+call vundle#end()
+filetype plugin indent on
+
+
 " Forget being compatible with good ol' vi
 set nocompatible
 
@@ -107,9 +118,6 @@ set number
 set smartindent
 set autoindent
 
-"Always show the status line
-set laststatus=2
-
 "Prefer a slightly higher line height
 set linespace=3
 
@@ -131,14 +139,18 @@ imap jj <esc>
 cmap jj <esc>
 
 " COLORS
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
 set t_Co=256
 set guicursor=n-v-c:block-Cursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor,r-cr:hor20-Cursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 if has("gui_running")
-  colors desert
-else
-  colors desert256
+  colorscheme desert
 endif
 set guifont=DejaVu\ Sans\ Mono\ 10
+
 
 "-----------------------------------------------------------------------------
 " NERD Tree Plugin Settings

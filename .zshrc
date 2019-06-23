@@ -57,6 +57,9 @@ alias cp="cp -i"                                                # Confirm before
 alias df='df -h'                                                # Human-readable sizes
 alias free='free -m'                                            # Show sizes in MB
 alias gitu='git add . && git commit && git push'
+alias vlc='vlc -I dummy'
+alias pac='sudo pacman -S'
+alias ll='ls -al --color=always'
 
 # Theming section  
 autoload -U compinit colors zcalc
@@ -176,10 +179,13 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
 #		#embers, flat, google, grayscale, greenscreen, harmonic16, isotope, londontube,
 #		#marrakesh, mocha, monokai, ocean, paraiso, pop (dark only), railscasts, shapesifter,
 #		#solarized, summerfruit, tomorrow, twilight
-#		#theme="eighties"
-#		#Possible variants: dark and light
-#		#shade="dark"
-#		#BASE16_SHELL="/usr/share/zsh/scripts/base16-shell/base16-$theme.$shade.sh"
+#    theme="monokai"
+##		#Possible variants: dark and light
+#    shade="dark"
+#    BASE16_SHELL="/usr/share/zsh/scripts/base16-shell/base16-$theme.$shade.sh"
+#[ -n "$PS1" ] && \
+#[ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+#    eval "$("$BASE16_SHELL/profile_helper.sh")"
 #		#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 #		# Use autosuggestion
 #		source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -188,9 +194,9 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
 #     ;;
   *)
         RPROMPT='$(git_prompt_string)'
-		# Use autosuggestion
-		source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-		ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-  		ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
     ;;
 esac
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+  [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+    eval "$("$BASE16_SHELL/profile_helper.sh")"

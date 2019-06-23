@@ -1,0 +1,35 @@
+#!/bin/bash
+CWD=$(pwd)
+sudo pacman -S \
+  bspwm \
+  sxhkd \
+  rxvt-unicode \
+  zsh-theme-powerlevel9k \
+  zsh-syntax-highlighting \
+  zsh-history-substring-search \
+  xdo \
+  acpi \
+  feh \
+  rofi \
+  ttf-font-awesome
+yay lemonbar-xft-git
+yay nerd-fonts-dejavu-complete
+
+echo -e "\u001b[36;1mAdding symlinks...\u001b[0m"
+ln -sfv $CWD/.zshrc ~/.zshrc
+ln -sfv $CWD/.vimrc ~/.vimrc
+ln -sfv $CWD/.xinitrc ~/.xinitrc
+ln -sfv $CWD/.gitconfig ~/.gitconfig
+ln -sfv $CWD/.Xresources ~/.Xresources
+mkdir .config
+# bspwm Window Manager
+ln -sfv $CWD/.config/bspwm ~/.config/
+# sxhkd Simple X Hotkey Daemon
+ln -sfv $CWD/.config/sxhkd/ ~/.config/
+# Lemonbar
+ln -sfv $CWD/.config/lemonbar/ ~/.config/
+# Base-16 Shell
+ln -sfv $CWD/.config/base16-shell/ ~/.config/
+
+echo -e "\u001b[36;1mChanging zsh...\u001b[0m"
+chsh -s /bin/zsh
