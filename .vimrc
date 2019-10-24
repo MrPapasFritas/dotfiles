@@ -3,11 +3,14 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+" Plugin 'VundleVim/Vundle.vim'
+Plugin 'chr4/nginx.vim'
 
 call vundle#end()
 filetype plugin indent on
 
+" Powerline
+set  rtp+=/usr/lib/python3.7/site-packages/powerline/bindings/vim/
 
 " Forget being compatible with good ol' vi
 set nocompatible
@@ -158,3 +161,6 @@ set guifont=DejaVu\ Sans\ Mono\ 10
 " Toggle the NERD Tree on an off with F7
 nmap <F7> :NERDTreeToggle /var/www<CR>
 au FocusLost * silent! :wa
+" disables opaque background                                                
+hi Normal ctermbg=none
+hi NonText ctermbg=none

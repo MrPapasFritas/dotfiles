@@ -1,19 +1,51 @@
 #!/bin/bash
+# This is executed after the Archlinux Ultimate Installer (AUI)
+# https://github.com/helmuthdu/aui
+
 CWD=$(pwd)
 sudo pacman -S \
-  bspwm \
-  sxhkd \
-  rxvt-unicode \
-  zsh-theme-powerlevel9k \
+  # Non UI packages
+  acpi \                        # For Battery Savings
+  # zsh-theme-powerlevel9k \
   zsh-syntax-highlighting \
   zsh-history-substring-search \
-  xdo \
-  acpi \
-  feh \
-  rofi \
-  ttf-font-awesome
-yay lemonbar-xft-git
-yay nerd-fonts-dejavu-complete
+  pavucontrol \                 # Control Pulseaudio
+  bluez bluez-utils \           # Bluetooth Manager
+  pulseaudio-alsa \             # Pulseaudio server for ALSA
+  pulseaudio-bluetooth \        # Pulseaudio server for Bluetooth (bluez)
+  htop \                        # Processes Monitor
+  ncdu \                        # Analyze disk usage
+  python \                      # Python
+  rclone \                      # Cloud Sync App for Dropbox sync
+  git \                         # Git
+  docker \                      # Docker
+  docker-compose \              # Docker Compose
+  mkcert \                      # Fake localhost SSL/TLS Certificates
+
+  #UI Packages
+  xdo \                         # For BSPWM stuff like lemonbar and hotkeys
+  termite \                     # Termite Terminal
+  gvim \                        # Gvim for clipboard bindings
+  scrot \                       # Screenshots
+  bspwm \                       # BSPWM window manager
+  sxhkd \                       # Simple X Hotkey Daemon
+  rofi \                        # App Launcher
+  rofimoji \                    # Emoji Searcher for rofi
+  feh \                         # Image Viewer and Background placer
+  # rxvt-unicode \              # URXVT Terminal (Replaced with termite)
+  ttf-font-awesome \            # Awesome Font for Icons
+  noto-fonts-emoji \            # Emoji Fonts
+  compton \                     # Compton Composer for terminal transparency
+  firefox \                     # firefox
+  keepass \                     # Password Manager
+
+yay lemonbar-xft-git            # Lemonbar
+yay nerd-fonts-dejavu-complete  # DejaVu Nerd Font for Icons
+yay ruby-colorls                # ls eye candy
+yay zsh-theme-powerlevel10k-git # PowerLevel 9K evolution
+
+pip install powerline-status    # Powerline Status for Vim
+
 
 echo -e "\u001b[36;1mAdding symlinks...\u001b[0m"
 ln -sfv $CWD/.zshrc ~/.zshrc
@@ -21,15 +53,31 @@ ln -sfv $CWD/.vimrc ~/.vimrc
 ln -sfv $CWD/.xinitrc ~/.xinitrc
 ln -sfv $CWD/.gitconfig ~/.gitconfig
 ln -sfv $CWD/.Xresources ~/.Xresources
-mkdir .config
-# bspwm Window Manager
+mkdir -p ~/.config
 ln -sfv $CWD/.config/bspwm ~/.config/
-# sxhkd Simple X Hotkey Daemon
 ln -sfv $CWD/.config/sxhkd/ ~/.config/
-# Lemonbar
 ln -sfv $CWD/.config/lemonbar/ ~/.config/
-# Base-16 Shell
 ln -sfv $CWD/.config/base16-shell/ ~/.config/
-
+ln -sfv $CWD/.config/colorls ~/.config/
 echo -e "\u001b[36;1mChanging zsh...\u001b[0m"
 chsh -s /bin/zsh
+
+# Select Monokai theme
+# WIll create symlink from ~/.base16_theme to ~/.config/base16-shell/scripts/base16-monokai.sh 
+# Will also create .vimrc_background to adapt vim theme to base16 (this does not change gvim behaviour, only terminal vim)
+base16_monokai 
+
+# Base16-rofi
+mkdir -p ~/.config/base16-rofi.git
+mkdir -p ~/.local/share/rofi/
+git clone https://github.com/0xdec/base16-rofi.git ~/.config/
+ln -svf ~/config/base16-rofi/themes ~/.local/share/rofi/
+
+# Microsoft Spotlight-like service
+echo -e "\u001b[36;1mInstalling Spotlight Service...\u001b[0m"
+mkdir ~/.local/share/spotlight
+cp ./spotlight/spotlight.sh /usr/bin
+cp ./spotlight/spotlight.service /usr/lib/systemd
+cp ./spotlight/spotlight.timer /usr/lib/systemd
+systemctl start spotlight.service
+systemctl enable spotlight.timer

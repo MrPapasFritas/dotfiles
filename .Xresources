@@ -1,45 +1,4 @@
-! ------------------------------------------------------------------------------
-! Import Colour from ~/.xrdb
-! ------------------------------------------------------------------------------
-#include ".xrdb/color/monokai-modified"
-#include ".xrdb/rofi/nord"
-
+! Everything is using base-16-shell
+! #include ".config/base16-xresources/xresources/base16-monokai-256.Xresources"
 ! URxvt
 Xft.dpi: 166
-
-! General settings
-URxvt.saveLines: 2000
-URxvt.scrollBar: False
-URxvt.scrollstyle: rxvt
-URxvt.termName: xterm-256color
-URxvt.urgentOnBell: True
-URxvt.cursorBlink: False
-! Transparency
-!URxvt*transparent: true
-!URxvt*shading: 10
-
-! Extensions
-URxvt.perl-ext-common: default,clipboard,keyboard-select,url-select
-URxvt.urlLauncher: xdg-open
-URxvt.urlButton: 1
-URxvt.underlineURLs: True
-
-URxvt.copyCommand:  xclip -i -selection clipboard
-URxvt.pasteCommand: xclip -o -selection clipboard
-
-! Keybindings
-URxvt.keysym.Mod4-c: perl:clipboard:copy
-URxvt.keysym.Mod4-v: perl:clipboard:paste
-URxvt.keysym.Mod4-C-v: perl:clipboard:paste_escaped
-URxvt.keysym.M-c: perl:clipboard:copy
-URxvt.keysym.M-v: perl:clipboard:paste
-URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
-URxvt.keysym.M-Escape: perl:keyboard-select:activate
-URxvt.keysym.C-Escape: perl:keyboard-select:activate
-URxvt.keysym.M-u: perl:url-select:select_next
-
-! Fonts
-
-!DejaVu Sans
-URxvt.font: xft:DejaVuSansMono Nerd Font Mono-9
-URxvt.letterSpace: -1

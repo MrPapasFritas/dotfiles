@@ -4,11 +4,13 @@
 
 # terminal emulator
 super + Return
-	urxvt
+	termite
 
 # program launcher
 super + @space
 	rofi -show run
+super + e
+  rofimoji
 
 # make sxhkd reload its configuration files:
 super + Escape
