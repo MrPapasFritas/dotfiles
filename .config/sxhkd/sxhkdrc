@@ -4,7 +4,9 @@
 
 # terminal emulator
 super + Return
-	termite
+  termite -d "$(readlink "/proc/"$(pgrep -P $(xprop -id $(bspc query -N -n) _NET_WM_PID | cut -d " " -f3))"/cwd")" || termite
+  #termite -d $(readlink "/proc"$(pgrep -P $(xprop -id $(bspc query -N -n) _NET_WM_PID | cut -d " " -f3))"/cwd")
+  #bspc query -N -n | xargs -I qr xprop -id qr _NET_WM_PID | cut -d " " -f3 | xargs -I windowId pgrep -P windowId | xargs -I pid readlink "/proc/pid/cwd" | xargs -I dir termite -d dir
 
 # program launcher
 super + @space
@@ -25,8 +27,8 @@ super + alt + {q,r}
 	bspc {quit,wm -r}
 
 # close and kill
-super + {_,shift + }w
-	bspc node -{c,k}
+super + q
+	bspc node -c
 
 # alternate between the tiled and monocle layout
 super + m
@@ -37,15 +39,15 @@ super + y
 	bspc node newest.marked.local -n newest.!automatic.local
 
 # swap the current node and the biggest node
-super + g
-	bspc node -s biggest
+# super + g
+# 	bspc node -s biggest
 
 #
 # state/flags
 #
 
 # set the window state
-super + {t,shift + t,s,f}
+super + {t,shift + t,f, shift + f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
@@ -147,3 +149,9 @@ XF86AudioMute
 ####################
 XF86MonBrightness{Up,Down}
   light {-A,-U} 5
+
+# change window gap at run time
+super + plus
+    bspc config -d focused window_gap $((`bspc config -d focused window_gap` + 5 ))
+super + minus
+    bspc config -d focused window_gap $((`bspc config -d focused window_gap` - 5 ))

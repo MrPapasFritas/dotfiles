@@ -1,3 +1,11 @@
+" RClone Sync after save
+function Rclone()
+  if stridx(expand("%:p"),$DROPBOX_DIR) == 0
+    execute('silent !rclone copyto %:p dropbox:'.substitute(expand("%:p"),$DROPBOX_DIR,"","")." &")
+  endif
+endfunction
+autocmd BufWritePost * call Rclone()
+"
 "--- Vundle ---
 set nocompatible
 filetype off
@@ -8,9 +16,6 @@ Plugin 'chr4/nginx.vim'
 
 call vundle#end()
 filetype plugin indent on
-
-" Powerline
-set  rtp+=/usr/lib/python3.7/site-packages/powerline/bindings/vim/
 
 " Forget being compatible with good ol' vi
 set nocompatible
@@ -164,3 +169,6 @@ au FocusLost * silent! :wa
 " disables opaque background                                                
 hi Normal ctermbg=none
 hi NonText ctermbg=none
+" Powerline
+set  rtp+=/usr/lib/python3.7/site-packages/powerline/bindings/vim/
+
