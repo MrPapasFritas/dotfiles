@@ -1,7 +1,7 @@
 " RClone Sync after save
 function Rclone()
   if stridx(expand("%:p"),$DROPBOX_DIR) == 0
-    execute('silent !rclone copyto %:p dropbox:'.substitute(expand("%:p"),$DROPBOX_DIR,"","")." &")
+    execute('silent !rclone copyto '.fnameescape(expand('%:p')).' dropbox:'.fnameescape(substitute(expand("%:p"),$DROPBOX_DIR,"",""))." &")
   endif
 endfunction
 autocmd BufWritePost * call Rclone()
@@ -11,8 +11,15 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" Plugin 'VundleVim/Vundle.vim'
-Plugin 'chr4/nginx.vim'
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'ap/vim-buftabline'
+Plugin 'sheerun/vim-polyglot'
+" Plugin 'neoclide/coc.nvim'
+Plugin 'francoiscabrol/ranger.vim'
+Plugin 'ap/vim-css-color'
+" RUN :PluginInstall at the end!
 
 call vundle#end()
 filetype plugin indent on
@@ -41,9 +48,18 @@ set lazyredraw
 " At least let yourself know what mode you're in
 set showmode
 
+" Set path to current project folder, for finding files
+set path+=**
+
 " Enable enhanced command-line completion. Presumes you have compiled
 " with +wildmenu.  See :help 'wildmenu'
 set wildmenu
+
+" vim-unimpaired buffer mappings
+nnoremap { :bprev<cr>
+nnoremap } :bnext<cr>
+" Close buffer without closing window
+command Bd bd | vs | bnext
 
 " Let's make it easy to edit this file (mnemonic for the key sequence is
 " 'e'dit 'v'imrc)
@@ -131,6 +147,25 @@ set linespace=3
 
 "Enable code folding
 set foldenable
+
+" Set netrw defaults
+" Remove  banner
+let g:netrw_banner = 0
+" Remove  banner
+let g:netrw_liststyle = 3
+" Open files in previous window
+let g:netrw_browse_split = 4
+" Set default width
+let g:netrw_winsize = 25
+" Open on Vim open?
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
+
+" Maybe use ranger?
+let g:ranger_map_keys = 0
+nmap - :Ranger<CR>
 
 " easier window navigation
 nmap <C-h> <C-w>h

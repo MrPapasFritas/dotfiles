@@ -20,7 +20,7 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 HISTFILE=~/.zhistory
 HISTSIZE=1000
 SAVEHIST=500
-#export EDITOR=/usr/bin/nano
+export EDITOR=vim
 #export VISUAL=/usr/bin/nano
 WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
 
@@ -61,6 +61,9 @@ alias vlc='vlc -I dummy'
 alias pac='sudo pacman -S'
 alias ll='ls -al --color=always'
 alias ls='colorls'
+alias dc='docker-compose'
+alias vim='nvim'
+alias ag='ag --ignore-dir node_modules --ignore-dir .git --ignore-dir _build'
 # alias cl-tv='sh ~/channels.sh'
 
 # Theming section  
@@ -222,3 +225,10 @@ POWERLEVEL9K_CUSTOM_EMOJI='echo $(RANDOM_EMOJI)'
 POWERLEVEL9K_CUSTOM_EMOJI_BACKGROUND=''
 
 export DROPBOX_DIR='/home/ricardoramos/Dropbox'
+export PATH=$PATH:/home/ricardoramos/.gem/ruby/2.7.0/bin:/home/ricardoramos/.local/bin/
+export GOPATH=~/gocode
+export PATH="$PATH:$GOPATH/bin"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export FZF_DEFAULT_COMMAND='find . -name .git -prune -o -name .* -prune -o -name node_modules -prune -o -name coverage -prune -o -name tmp -prune -o -name _build -prune -o -type f -print'
