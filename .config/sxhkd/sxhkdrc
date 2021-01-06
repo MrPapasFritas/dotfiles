@@ -4,7 +4,8 @@
 
 # terminal emulator
 super + Return
-  termite -d "$(readlink "/proc/"$(pgrep -P $(xprop -id $(bspc query -N -n) _NET_WM_PID | cut -d " " -f3))"/cwd")" || termite
+  kitty -d "$(readlink "/proc/"$(pgrep -P $(xprop -id $(bspc query -N -n) _NET_WM_PID | cut -d " " -f3))"/cwd")" || kitty
+  #termite -d "$(readlink "/proc/"$(pgrep -P $(xprop -id $(bspc query -N -n) _NET_WM_PID | cut -d " " -f3))"/cwd")" || termite
   #termite -d $(readlink "/proc"$(pgrep -P $(xprop -id $(bspc query -N -n) _NET_WM_PID | cut -d " " -f3))"/cwd")
   #bspc query -N -n | xargs -I qr xprop -id qr _NET_WM_PID | cut -d " " -f3 | xargs -I windowId pgrep -P windowId | xargs -I pid readlink "/proc/pid/cwd" | xargs -I dir termite -d dir
 

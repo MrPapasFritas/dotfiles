@@ -3,7 +3,7 @@
 sxhkd &
 # compton &
 
-bspc monitor -d I II III IV V VI
+bspc monitor -d I II III IV V VI VII VIII
 
 bspc config border_width         5
 bspc config window_gap          12
